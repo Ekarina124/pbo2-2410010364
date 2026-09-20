@@ -18,16 +18,15 @@ public class KartuMahasiswa {
         String alasan = "Belum terlalu paham mengenai PBO, di PBO 2 saya akan belajar lagi";
         
         
-        System.out.println("============================================================");
+        System.out.println("==============================");
         System.out.println("KARTU MAHASISWA PBO 2");
-        System.out.println("============================================================");
+        System.out.println("==============================");
         System.out.println("Nama     : " + nama );
         System.out.println("NPM      : " + npm );
         System.out.println("Prodi    : " + prodi );
         System.out.println("Semester : " + semester );
         System.out.println("Alasan   : " + alasan );
-        System.out.println("============================================================");
-        System.out.println();
+        System.out.println("==============================");
     }
     
 }
