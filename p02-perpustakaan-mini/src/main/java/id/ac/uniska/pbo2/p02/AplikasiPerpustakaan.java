@@ -15,16 +15,24 @@ public class AplikasiPerpustakaan {
         perpus.tambah(new Buku("B001", "Laskar Pelangi", 2005, "Andrea Hirata"));
         perpus.tambah(new Buku("B002", "Clean Code", 2008, "Robert C. Martin"));
         perpus.tambah(new Majalah("M001", "Majalah Teknologi Kita", 2026, "Agustus"));
+        perpus.tambah(new Skripsi("S001", "Skripsi Pemrograman Berbasi Objek 2", 2026, "Siti Ekarina Septianor", "Teknik Informatika"));
 //        perpus.tambah(new Buku("B009", "percobaan", 2020, "Anonim"));
+        
         
 
         Anggota siti = new Anggota("2410010123", "Siti Rahmah");
         Anggota budi = new Anggota("2410010456", "Budi Santoso");
 
         tampilkanDaftar(perpus);
-
+        
+        System.out.println("Hasil pencarian \"code\": " + perpus.cariJudul("code").size() + " koleksi");
+        for (Koleksi k : perpus.cariJudul("code")) {
+            System.out.println(k);
+        }
+        
         System.out.println();
         cetakPinjam(perpus, "B002", siti);
+        cetakPinjam(perpus, "S001", siti);
 //        perpus.cari("B002").status = StatusKoleksi.TERSEDIA;
         cetakPinjam(perpus, "B002", budi);
         cetakPinjam(perpus, "M001", budi);
