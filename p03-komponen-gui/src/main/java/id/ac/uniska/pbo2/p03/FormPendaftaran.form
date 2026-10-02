@@ -187,11 +187,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Mode Gelap"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="temaToggleActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="daftarButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Daftar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="daftarButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

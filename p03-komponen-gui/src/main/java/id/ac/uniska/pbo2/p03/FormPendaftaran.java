@@ -4,6 +4,14 @@
  */
 package id.ac.uniska.pbo2.p03;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Vivobook
@@ -17,6 +25,11 @@ public class FormPendaftaran extends javax.swing.JFrame {
      */
     public FormPendaftaran() {
         initComponents();
+        
+        // Kode tambahan ditulis setelah initComponents(), di luar blok abu-abu buatan NetBeans
+        namaField.putClientProperty("JTextField.placeholderText", "Nama lengkap");
+        npmField.putClientProperty("JTextField.placeholderText", "Contoh: 2410010001");
+        getRootPane().setDefaultButton(daftarButton);
     }
 
     /**
@@ -75,8 +88,10 @@ public class FormPendaftaran extends javax.swing.JFrame {
         webCheck.setText("Web");
 
         temaToggle.setText("Mode Gelap");
+        temaToggle.addActionListener(this::temaToggleActionPerformed);
 
         daftarButton.setText("Daftar");
+        daftarButton.addActionListener(this::daftarButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,26 +163,53 @@ public class FormPendaftaran extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void daftarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarButtonActionPerformed
+        //FIRST:event_daftarButtonActionPerformed
+        tampilkanRingkasan();
+    }//GEN-LAST:event_daftarButtonActionPerformed
+
+    private void temaToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_temaToggleActionPerformed
+        //FIRST:event_temaToggleActionPerformed
+        gantiTema(temaToggle.isSelected());
+    }//GEN-LAST:event_temaToggleActionPerformed
+
+    private void tampilkanRingkasan() {
+        String jenisKelamin = lakiRadio.isSelected() ? "Laki-laki" : "Perempuan";
+
+        List<String> minat = new ArrayList<>();
+        for (JCheckBox cb : List.of(javaCheck, pythonCheck, webCheck)) {
+            if (cb.isSelected()) {
+                minat.add(cb.getText());
+            }
+        }
+        
+        String pesan = "Nama: " + namaField.getText()
+                + "\nNPM: " + npmField.getText()
+                + "\nProgram Studi: " + prodiCombo.getSelectedItem()
+                + "\nJenis Kelamin: " + jenisKelamin
+                + "\nMinat: " + (minat.isEmpty() ? "-" : String.join(", ", minat));
+        
+        JOptionPane.showMessageDialog(this, pesan, "Data Pendaftaran",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    
+    private void gantiTema(boolean gelap) {
+        if (gelap) {
+            FlatDarkLaf.setup();
+        } else {
+            FlatLightLaf.setup();
+        }
+        FlatLaf.updateUI(); // terapkan tema baru ke semua jendela yang terbuka
+        temaToggle.setText(gelap ? "Mode Terang" : "Mode Gelap");
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+       // Blok Nimbus buatan NetBeans diganti dengan tema FlatLaf
+        FlatLightLaf.setup();
+        // Tampilkan form di Event Dispatch Thread
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new FormPendaftaran().setVisible(true));
