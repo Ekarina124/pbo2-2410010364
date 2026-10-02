@@ -60,6 +60,7 @@ public class FormPendaftaran extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form Pendaftaran Workshop");
+        setName("framePendaftaran"); // NOI18N
 
         namaLabel.setText("Nama");
         namaLabel.setName(""); // NOI18N
@@ -209,8 +210,8 @@ public class FormPendaftaran extends javax.swing.JFrame {
     public static void main(String args[]) {
        // Blok Nimbus buatan NetBeans diganti dengan tema FlatLaf
         FlatLightLaf.setup();
+        
         // Tampilkan form di Event Dispatch Thread
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new FormPendaftaran().setVisible(true));
     }
