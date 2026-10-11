@@ -6,7 +6,6 @@
 
 ## 1. Screenshot Form Pemesanan Tiket Travel
 
-### Tema Gelap
 
 ![Form Tiket Travel Tema Terang](Screenshot-dan-jawaban/SS%20FormTiketTravel%20tema%20terang.png)
 
