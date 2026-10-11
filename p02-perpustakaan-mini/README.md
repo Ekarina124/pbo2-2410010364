@@ -2,8 +2,9 @@ Nama : Siti Ekarina Septianor
 NPM : 2410010364
 Kelas : 5C REG BJM
 
-1. Tangkapan layar(screenshot) keluaran program yang menunjukkan pencarian dan percobaan meminjam Skripsi;
-   (Screenshoot-dan-Jawaban-Eksperimen/SS-Keluaran-program-pencarian-dan-percobaan-meminjam-skripsi.png)
+1. 1. Tangkapan layar (screenshot) keluaran program yang menunjukkan pencarian dan percobaan meminjam Skripsi.
+
+![Screenshot keluaran program](Screenshoot-dan-Jawaban-Eksperimen/SS-Keluaran-program-pencarian-dan-percobaan-meminjam-skripsi.png)
 
 2. Jawaban singkat keempat eksperimen pada Praktikum 6.
 
