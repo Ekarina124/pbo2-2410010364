@@ -8,15 +8,11 @@
 
 ### Tema Gelap
 
-![Form Tiket Travel Tema Gelap](SS%20FormTiketTravel%20tema%20gelap.png)
+![Tema Gelap](Screenshoot-dan-Jawaban-Eksperimen/SS%20FormTiketTravel%20tema%20gelap.png)
 
-### Tema Terang
+![Tema Terang](Screenshoot-dan-Jawaban-Eksperimen/SS%20FormTiketTravel%20tema%20terang.png)
 
-![Form Tiket Travel Tema Terang](SS%20FormTiketTravel%20tema%20terang.png)
-
-## 2. Screenshot Tab Design FormTiketTravel
-
-![Tab Design FormTiketTravel](SS%20Tab%20Design.png)
+![Tab Design](Screenshoot-dan-Jawaban-Eksperimen/SS%20Tab%20Design.png)
 
 ## 3. Jawaban Refleksi Bagian G
 
