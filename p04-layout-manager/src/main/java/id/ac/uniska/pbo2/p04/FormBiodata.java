@@ -19,6 +19,18 @@ public class FormBiodata extends javax.swing.JFrame {
      */
     public FormBiodata() {
         initComponents();
+        
+        // Kode tambahan: gaya huruf FlatLaf, placeholder, dan tombol default
+        judulLabel.putClientProperty("FlatLaf.styleClass", "h2");
+        keteranganLabel.putClientProperty("FlatLaf.style", "foreground: $Label.disabledForeground");
+        dataDiriLabel.putClientProperty("FlatLaf.styleClass", "h4");
+        kontakLabel.putClientProperty("FlatLaf.styleClass", "h4");
+        emailField.putClientProperty("JTextField.placeholderText", "nama@contoh.com");
+        noHpField.putClientProperty("JTextField.placeholderText", "08xxxxxxxxxx");
+        getRootPane().setDefaultButton(simpanButton);
+        pack(); // hitung ulang ukuran setelah gaya huruf berubah
+        setMinimumSize(getSize()); // jendela tidak dapat dikecilkan melebihi ukuran awal
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -66,7 +78,7 @@ public class FormBiodata extends javax.swing.JFrame {
         judulLabel.setText("Biodata Mahasiswa");
         headerPanel.add(judulLabel);
 
-        keteranganLabel.setText("Lengkapi data berikut sesuai Kartu Tanda Mahasiswa");
+        keteranganLabel.setText("Lengkapi data berikut sesuai Kartu Tanda Mahasiswa.");
         headerPanel.add(keteranganLabel);
 
         getContentPane().add(headerPanel, java.awt.BorderLayout.NORTH);
@@ -81,53 +93,80 @@ public class FormBiodata extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 6, 0);
         formPanel.add(dataDiriLabel, gridBagConstraints);
 
+        namaLabel.setLabelFor(namaField);
         namaLabel.setText("Nama Lengkap");
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 12);
         formPanel.add(namaLabel, gridBagConstraints);
 
+        npmLabel.setLabelFor(npmField);
         npmLabel.setText("NPM");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 12);
         formPanel.add(npmLabel, gridBagConstraints);
 
+        prodiLabel.setLabelFor(prodiCombo);
         prodiLabel.setText("Program Studi");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 12);
         formPanel.add(prodiLabel, gridBagConstraints);
 
+        semesterLabel.setLabelFor(semesterSpinner);
         semesterLabel.setText("Semester");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 12);
         formPanel.add(semesterLabel, gridBagConstraints);
 
         kontakLabel.setText("Kontak");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(16, 0, 6, 0);
         formPanel.add(kontakLabel, gridBagConstraints);
 
+        emailLabel.setLabelFor(emailField);
         emailLabel.setText("Email");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 12);
         formPanel.add(emailLabel, gridBagConstraints);
 
+        hpLabel.setLabelFor(noHpField);
         hpLabel.setText("Nomor HP");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 12);
         formPanel.add(hpLabel, gridBagConstraints);
 
+        alamatLabel.setLabelFor(alamatArea);
         alamatLabel.setText("Alamat");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 6, 12);
         formPanel.add(alamatLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -149,6 +188,7 @@ public class FormBiodata extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
         formPanel.add(prodiCombo, gridBagConstraints);
 
@@ -171,6 +211,7 @@ public class FormBiodata extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
         formPanel.add(noHpField, gridBagConstraints);
 
@@ -208,22 +249,6 @@ public class FormBiodata extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
         // Blok Nimbus buatan NetBeans diganti dengan tema FlatLaf
         FlatLightLaf.setup();
         
