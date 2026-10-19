@@ -4,7 +4,7 @@ Mata kuliah: Pemrograman Berbasis Objek 2 (TIF1508), Pertemuan 4
 
 |        |                                                                                      |
 | ------ | ------------------------------------------------------------------------------------ |
-| Nama   | [isi nama lengkap]                                                                   |
+| Nama   | Siti Ekarina Septianor                                                               |
 | NPM    | 2410010364                                                                           |
 | Kelas  | 4C                                                                                   |
 | Proyek | `p04-layout-manager` (Group Id `id.ac.uniska.pbo2`, package `id.ac.uniska.pbo2.p04`) |
