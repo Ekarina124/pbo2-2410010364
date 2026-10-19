@@ -23,7 +23,7 @@ Mata kuliah: Pemrograman Berbasis Objek 2 (TIF1508), Pertemuan 4
 
 ### Tahap 1: Sketsa
 
-![Sketsa Form Anggota Perpustakaan](ss/sketsa.jpg)
+![Sketsa Form Anggota Perpustakaan](ss/sketsa.jpeg)
 
 ### Tahap 2: Tabel Rancangan
 
@@ -68,6 +68,10 @@ Form saat dijalankan, ukuran awal:
 Form saat dilebarkan:
 
 ![Saat dilebarkan](ss/ss-dilebarkan.png)
+
+Form saat di perbaiki menurut arahan teman
+
+![Saat dilebarkan](ss/perbaikan-teman.png)
 
 Tab Design dengan susunan panel dan layout di jendela Navigator:
 

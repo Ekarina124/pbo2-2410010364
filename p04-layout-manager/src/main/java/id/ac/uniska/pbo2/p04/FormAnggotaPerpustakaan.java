@@ -253,11 +253,13 @@ public class FormAnggotaPerpustakaan extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 0);
         formPanel.add(alamatPane, gridBagConstraints);
 
+        persetujuanLabel.setLabelFor(setujuCheck);
         persetujuanLabel.setText("Persetujuan");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -267,7 +269,7 @@ public class FormAnggotaPerpustakaan extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(16, 0, 6, 0);
         formPanel.add(persetujuanLabel, gridBagConstraints);
 
-        isiPanel.add(formPanel, java.awt.BorderLayout.NORTH);
+        isiPanel.add(formPanel, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(isiPanel, java.awt.BorderLayout.CENTER);
 
