@@ -31,7 +31,7 @@ Mata kuliah: Pemrograman Berbasis Objek 2 (TIF1508), Pertemuan 4
 | -------- | ----------------------------------------------- | ---------------------------------------------------- |
 | Jendela  | JFrame                                          | BorderLayout                                         |
 | Header   | `headerPanel` (North)                           | BoxLayout, Y Axis                                    |
-| Isi form | `isiPanel` (Center), berisi `formPanel` (North) | `isiPanel`: BorderLayout; `formPanel`: GridBagLayout |
+| Isi form | `isiPanel` (Center), berisi `formPanel` (Center) | `isiPanel`: BorderLayout; `formPanel`: GridBagLayout |
 | Tombol   | `tombolPanel` (South)                           | FlowLayout, Alignment Right                          |
 
 Susunan panel (sesuai jendela Navigator):
@@ -42,7 +42,7 @@ JFrame (BorderLayout)
 │     ├── judulLabel
 │     └── keteranganLabel
 ├── Center : isiPanel (BorderLayout)
-│     └── North : formPanel (GridBagLayout)
+│     └── Center: formPanel (GridBagLayout, Alamat diberi Weight Y 1.0)
 │           ├── Data Anggota : NPM, Nama Lengkap, Program Studi, Jenis Anggota (jenisPanel: 3 RadioButton)
 │           ├── Kontak       : Email, Nomor HP, Alamat
 │           └── Persetujuan  : CheckBox tata tertib
@@ -57,7 +57,7 @@ Alasan pemilihan layout:
 - **BoxLayout (Y Axis)** untuk header karena judul dan keterangan disusun ke bawah.
 - **GridBagLayout** untuk `formPanel` karena label dan isian berada di kolom dengan lebar berbeda (label menyempit, isian melebar).
 - **FlowLayout (Right)** untuk tombol agar tombol rata kanan dengan jarak seragam.
-- `formPanel` dibungkus `isiPanel` dan ditaruh di North supaya baris form tetap di atas saat jendela ditinggikan.
+- `formPanel` ditaruh di Center `isiPanel`, dan hanya area Alamat yang diberi Weight Y 1.0 (Fill Both). Saat jendela ditinggikan, baris lain tetap di atas dan hanya Alamat yang memanjang, sehingga tidak ada ruang kosong di antara isi form dan tombol.
 
 ### Tangkapan Layar
 
@@ -69,9 +69,9 @@ Form saat dilebarkan:
 
 ![Saat dilebarkan](ss/ss-dilebarkan.png)
 
-Form saat di perbaiki menurut arahan teman
+Form setelah diperbaiki sesuai saran teman:
 
-![Saat dilebarkan](ss/perbaikan-teman.png)
+![Setelah perbaikan sesuai saran teman](ss/perbaikan-teman.png)
 
 Tab Design dengan susunan panel dan layout di jendela Navigator:
 
@@ -113,7 +113,7 @@ Tombol melebar memenuhi lebar panel dan semuanya sama lebar. Sebelumnya BoxLayou
 Tidak ada perubahan, isian tetap melebar saat jendela dilebarkan. Karena Weight X dihitung per kolom dengan mengambil nilai terbesar, dan isian lain di kolom yang sama masih 1.0, kolom isian tetap mendapat sisa lebar. Weight X baru terlihat pengaruhnya jika semua isian dalam kolom itu bernilai 0.0.
 
 **2. Direction `formPanel` di dalam `isiPanel` diubah dari North menjadi Center, lalu jendela ditinggikan.**
-Dengan North, baris form tetap menempel di bagian atas saat jendela ditinggikan. Dengan Center, formPanel ikut ditarik memenuhi tinggi panel sehingga baris-barisnya bergeser ke tengah dan muncul ruang kosong di atas dan bawah. Itulah alasan formPanel dibungkus isiPanel dan ditaruh di North.
+Dengan North, baris form tetap menempel di bagian atas saat jendela ditinggikan. Dengan Center, formPanel ikut ditarik memenuhi tinggi panel sehingga baris-barisnya bergeser ke tengah dan muncul ruang kosong di atas dan bawah. Itulah alasan formPanel dibungkus isiPanel dan ditaruh di North pada rancangan dasar FormBiodata.
 
 **3. Baris `setMinimumSize(getSize())` dihapus, lalu jendela dikecilkan sekecil mungkin.**
 Jendela bisa dikecilkan sampai sangat kecil dan tampilan rusak. Bagian yang terpotong lebih dulu adalah isi form (alamat dan isian di bagian bawah), lalu panel tombol, dan terakhir header. Hal ini karena BorderLayout memberi North dan South ukuran yang dibutuhkan, sedangkan Center hanya mendapat sisanya. setMinimumSize mencegah hal ini dengan membatasi ukuran terkecil jendela.
@@ -125,6 +125,8 @@ Jendela bisa dikecilkan sampai sangat kecil dan tampilan rusak. Bagian yang terp
 Teman pemeriksa: Selvia Melani Putri
 
 Saran perbaikan: Form nya sudah lumayan rapi tapi saat jendela ditinggikan, isi form tetap di atas dan muncul ruang kosong sebelum tombol. Bisa beri weight Y 1.0 dan fill BOTH pada kolom alamat, lalu pindahkan formPanel ke CENTER agar Alamat ikut memanjang.
+
+Tindak lanjut: saran diterapkan. `formPanel` dipindah dari North ke Center, dan `alamatPane` diberi Fill Both dengan Weight Y 1.0. Hasilnya, saat jendela ditinggikan hanya Alamat yang memanjang dan baris lainnya tetap di atas (lihat tangkapan layar "Form setelah diperbaiki sesuai saran teman").
 
 ---
 
@@ -140,7 +142,7 @@ FlowLayout mempertahankan ukuran asli komponen dan menyusunnya berderet, pindah 
 Weight X menentukan pembagian sisa lebar ke kolom (1.0 untuk isian agar melebar, 0.0 untuk label). Fill menentukan apakah komponen memenuhi selnya (Horizontal agar kotak isian memanjang mengikuti lebar kolom).
 
 **4. Mengapa `formPanel` dibungkus `isiPanel` dan diletakkan di North?**
-Agar baris form tetap rapat di bagian atas saat jendela ditinggikan. Jika langsung di Center, baris form ikut tertarik dan bergeser ke tengah.
+Pada rancangan dasar di modul (FormBiodata), `formPanel` ditaruh di North `isiPanel` agar baris form tetap rapat di atas saat jendela ditinggikan. Jika diletakkan di Center tanpa Weight Y, GridBagLayout membagi tinggi tambahan ke seluruh isi sehingga baris form bergeser ke tengah (hasil Eksperimen 2). Pada FormAnggotaPerpustakaan saya meletakkan `formPanel` di Center, tetapi memberi Weight Y 1.0 hanya pada area Alamat, sehingga baris lain tetap di atas dan hanya Alamat yang memanjang.
 
 **5. Dua prinsip desain yang diterapkan.**
 Keselarasan (label di kolom 0 dan isian di kolom 1 membentuk garis lurus) dan kedekatan (isian dikelompokkan dengan judul bagian "Data Anggota", "Kontak", dan "Persetujuan").
@@ -151,4 +153,4 @@ Keselarasan (label di kolom 0 dan isian di kolom 1 membentuk garis lurus) dan ke
 
 Alat yang digunakan: Claude (Anthropic).
 
-Keperluan: membantu menjelaskan konsep layout manager dan constraint GridBagLayout, mengecek kode hasil NetBeans terhadap modul, memberi saran perbaikan form, serta membantu menyusun draf README ini. Pembuatan form di NetBeans, pengujian tampilan, dan pengamatan hasil eksperimen saya lakukan sendiri.
+Keperluan: membantu menjelaskan konsep layout manager dan constraint GridBagLayout, mengecek kode hasil NetBeans terhadap modul, memberi saran perbaikan form, membantu memeriksa form teman pada Tahap 4, serta membantu menyusun draf README ini. Pembuatan form di NetBeans, pengujian tampilan, dan pengamatan hasil eksperimen saya lakukan sendiri.
