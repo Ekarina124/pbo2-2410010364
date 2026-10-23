@@ -8,7 +8,7 @@ package id.ac.uniska.pbo2.p05;
  *
  * @author Vivobook
  */
-public class KonverterSuhu {
+public final class KonverterSuhu {
     private KonverterSuhu() {
         // kelas utilitas, tidak perlu dibuat object-nya
     }
