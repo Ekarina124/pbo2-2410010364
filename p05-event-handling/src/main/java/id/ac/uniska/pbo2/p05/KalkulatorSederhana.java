@@ -27,6 +27,10 @@ public class KalkulatorSederhana extends javax.swing.JFrame {
         
         // Cara 2. Lambda ditulis sendiri di konstruktor, setelah initComponents()
         kaliButton.addActionListener(e -> hitung('x'));
+//        kaliButton.addActionListener(e -> {
+//            System.out.println("kali");
+//            hitung('x');
+//        });
         
         // Cara 3. Method reference: langsung menunjuk method hapus yang sudah ada
         hapusButton.addActionListener(this::hapus);
@@ -52,6 +56,7 @@ public class KalkulatorSederhana extends javax.swing.JFrame {
         kurangButton = new javax.swing.JButton();
         kaliButton = new javax.swing.JButton();
         bagiButton = new javax.swing.JButton();
+        modButton = new javax.swing.JButton();
         bawahPanel = new javax.swing.JPanel();
         hasilLabel = new javax.swing.JLabel();
         hapusButton = new javax.swing.JButton();
@@ -68,7 +73,7 @@ public class KalkulatorSederhana extends javax.swing.JFrame {
 
         isiPanel.add(isianPanel);
 
-        operatorPanel.setLayout(new java.awt.GridLayout(1, 4, 8, 0));
+        operatorPanel.setLayout(new java.awt.GridLayout(1, 5, 8, 0));
 
         tambahButton.setText("+");
         tambahButton.addActionListener(this::tambahButtonActionPerformed);
@@ -84,6 +89,10 @@ public class KalkulatorSederhana extends javax.swing.JFrame {
         bagiButton.setText("/");
         bagiButton.addActionListener(this::bagiButtonActionPerformed);
         operatorPanel.add(bagiButton);
+
+        modButton.setText("%");
+        modButton.addActionListener(this::modButtonActionPerformed);
+        operatorPanel.add(modButton);
 
         isiPanel.add(operatorPanel);
 
@@ -112,12 +121,17 @@ public class KalkulatorSederhana extends javax.swing.JFrame {
         hitung('/');
     }//GEN-LAST:event_bagiButtonActionPerformed
 
+    private void modButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modButtonActionPerformed
+        hitung('%');
+    }//GEN-LAST:event_modButtonActionPerformed
+
     
     private void hitung(char operator) {
         try {
             double a = Double.parseDouble(angka1Field.getText().trim());
             double b = Double.parseDouble(angka2Field.getText().trim());
-            if (operator == '/' && b == 0) {
+//            if (operator == '/' && b == 0) {
+            if ((operator == '/' || operator == '%') && b == 0){
                 hasilLabel.setText("Tidak dapat membagi dengan nol");
                 return;
             }
@@ -125,6 +139,7 @@ public class KalkulatorSederhana extends javax.swing.JFrame {
                 case '+' -> a + b;
                 case '-' -> a - b;
                 case 'x' -> a * b;
+                case '%' -> a % b;
                 default -> a / b;
             };
             hasilLabel.setText("Hasil: " + rapikan(a) + " " + operator + " "
@@ -171,6 +186,7 @@ public class KalkulatorSederhana extends javax.swing.JFrame {
     private javax.swing.JPanel isianPanel;
     private javax.swing.JButton kaliButton;
     private javax.swing.JButton kurangButton;
+    private javax.swing.JButton modButton;
     private javax.swing.JPanel operatorPanel;
     private javax.swing.JButton tambahButton;
     // End of variables declaration//GEN-END:variables

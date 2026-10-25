@@ -90,17 +90,18 @@ public class KonversiSuhu extends javax.swing.JFrame {
         konversi();
     }//GEN-LAST:event_celsiusFieldActionPerformed
 
-    private void celsiusFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_celsiusFieldKeyReleased
-        // Hasil diperbarui setiap tombol keyboard dilepas
-        konversi();
-    }//GEN-LAST:event_celsiusFieldKeyReleased
-
     private void satuanComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_satuanComboItemStateChanged
         // Dipanggil dua kali: untuk pilihan lama (DESELECTED) dan pilihan baru (SELECTED)
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             konversi();
         }
+//        System.out.println("item berubah");
+//        konversi();
     }//GEN-LAST:event_satuanComboItemStateChanged
+
+    private void celsiusFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_celsiusFieldKeyReleased
+        konversi();
+    }//GEN-LAST:event_celsiusFieldKeyReleased
 
     
     /** Membaca isian, menghitung, lalu menampilkan hasil. Dipanggil oleh semua event. */

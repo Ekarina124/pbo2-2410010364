@@ -61,7 +61,7 @@
         <Container class="javax.swing.JPanel" name="operatorPanel">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-            <Property name="columns" type="int" value="4"/>
+            <Property name="columns" type="int" value="5"/>
             <Property name="horizontalGap" type="int" value="8"/>
             <Property name="rows" type="int" value="1"/>
           </Layout>
@@ -93,6 +93,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bagiButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="modButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="%"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
