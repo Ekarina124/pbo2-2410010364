@@ -4,6 +4,10 @@
  */
 package id.ac.uniska.pbo2.p07;
 
+import java.util.List;
+import java.util.ArrayList;
+import javax.swing.table.AbstractTableModel;
+
 /**
  * Menghubungkan daftar Kontak dengan JTable.
  * JTable bertanya kepada model: berapa baris, berapa kolom, dan apa isi setiap sel.
