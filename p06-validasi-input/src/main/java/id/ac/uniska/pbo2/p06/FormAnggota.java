@@ -92,9 +92,9 @@ public class FormAnggota extends javax.swing.JFrame {
         emailPesanLabel = new javax.swing.JLabel();
         hpField = new javax.swing.JTextField();
         hpPesanLabel = new javax.swing.JLabel();
-        setujuCheck = new javax.swing.JCheckBox();
         alamatPane = new javax.swing.JScrollPane();
         alamatArea = new javax.swing.JTextArea();
+        setujuCheck = new javax.swing.JCheckBox();
         bawahPanel = new javax.swing.JPanel();
         statusLabel = new javax.swing.JLabel();
         tombolPanel = new javax.swing.JPanel();
@@ -185,7 +185,7 @@ public class FormAnggota extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 2, 2, 0);
+        gridBagConstraints.insets = new java.awt.Insets(4, 0, 0, 12);
         formPanel.add(emailLabel, gridBagConstraints);
 
         noHpLabel.setDisplayedMnemonic('H');
@@ -195,7 +195,7 @@ public class FormAnggota extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 2, 2, 0);
+        gridBagConstraints.insets = new java.awt.Insets(4, 0, 0, 12);
         formPanel.add(noHpLabel, gridBagConstraints);
 
         alamatLabel.setDisplayedMnemonic('L');
@@ -205,7 +205,7 @@ public class FormAnggota extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 13;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 2, 2, 0);
+        gridBagConstraints.insets = new java.awt.Insets(4, 0, 0, 12);
         formPanel.add(alamatLabel, gridBagConstraints);
 
         npmField.setToolTipText("Hanya angka, tepat 10 digit");
@@ -280,15 +280,18 @@ public class FormAnggota extends javax.swing.JFrame {
         jenisPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 12, 0));
 
         jenisGroup.add(mahasiswaRadio);
+        mahasiswaRadio.setMnemonic('M');
         mahasiswaRadio.setSelected(true);
         mahasiswaRadio.setText("Mahasiswa");
         jenisPanel.add(mahasiswaRadio);
 
         jenisGroup.add(dosenRadio);
+        dosenRadio.setMnemonic('D');
         dosenRadio.setText("Dosen");
         jenisPanel.add(dosenRadio);
 
         jenisGroup.add(umumRadio);
+        umumRadio.setMnemonic('U');
         umumRadio.setText("Umum");
         jenisPanel.add(umumRadio);
 
@@ -300,7 +303,6 @@ public class FormAnggota extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 0, 0, 0);
         formPanel.add(jenisPanel, gridBagConstraints);
-        jenisPanel.getAccessibleContext().setAccessibleDescription("");
 
         emailField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -329,6 +331,11 @@ public class FormAnggota extends javax.swing.JFrame {
                 hpFieldFocusLost(evt);
             }
         });
+        hpField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                hpFieldKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 11;
@@ -346,17 +353,6 @@ public class FormAnggota extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 2, 2, 0);
         formPanel.add(hpPesanLabel, gridBagConstraints);
 
-        setujuCheck.setMnemonic('T');
-        setujuCheck.setText("Saya setuju dengan tata tertib perpustakaan");
-        setujuCheck.addItemListener(this::setujuCheckItemStateChanged);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 0, 0, 0);
-        formPanel.add(setujuCheck, gridBagConstraints);
-
         alamatArea.setColumns(20);
         alamatArea.setRows(3);
         alamatPane.setViewportView(alamatArea);
@@ -369,6 +365,17 @@ public class FormAnggota extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 0, 0, 0);
         formPanel.add(alamatPane, gridBagConstraints);
+
+        setujuCheck.setMnemonic('T');
+        setujuCheck.setText("Saya setuju dengan tata tertib perpustakaan");
+        setujuCheck.addItemListener(this::setujuCheckItemStateChanged);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 0, 0, 0);
+        formPanel.add(setujuCheck, gridBagConstraints);
 
         isiPanel.add(formPanel, java.awt.BorderLayout.NORTH);
 
@@ -448,6 +455,15 @@ public class FormAnggota extends javax.swing.JFrame {
     private void daftarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarButtonActionPerformed
         daftar();
     }//GEN-LAST:event_daftarButtonActionPerformed
+
+    private void hpFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hpFieldKeyTyped
+        // Pencegahan kesalahan: nomor HP hanya angka dan paling banyak 13 digit
+        boolean penuh = hpField.getText().length() >= 13
+                && hpField.getSelectedText() == null;
+        if (!Character.isDigit(evt.getKeyChar()) || penuh) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_hpFieldKeyTyped
 
     
     private boolean periksaNpm() {
