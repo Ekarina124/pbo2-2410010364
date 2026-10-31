@@ -1,6 +1,5 @@
 package id.ac.uniska.pbo2.p07;
-import com.formdev.flatlaf.FlatLaf;
-import java.awt.Color;
+//import java.awt.Color;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -35,9 +34,9 @@ public class DialogKontak extends javax.swing.JDialog {
         }
         emailField.putClientProperty("JTextField.placeholderText", "Boleh dikosongkan");
         pesanLabel.putClientProperty("FlatLaf.styleClass", "small");
-        pesanLabel.setForeground(FlatLaf.isLafDark()
-            ? new Color(0xFF8A80) : new Color(0xC62828));
-        getRootPane().setDefaultButton(simpanButton);
+        //pesanLabel.setForeground(FlatLaf.isLafDark()
+//            ? new Color(0xFF8A80) : new Color(0xC62828));
+//        getRootPane().setDefaultButton(simpanButton);
         
         pack();
         setLocationRelativeTo(pemilik);
@@ -108,6 +107,8 @@ public class DialogKontak extends javax.swing.JDialog {
 
         formPanel.add(isianPanel, java.awt.BorderLayout.CENTER);
 
+        getContentPane().add(formPanel, java.awt.BorderLayout.CENTER);
+
         bawahPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 16, 16, 16));
         bawahPanel.setLayout(new java.awt.BorderLayout(0, 8));
 
@@ -127,9 +128,7 @@ public class DialogKontak extends javax.swing.JDialog {
 
         bawahPanel.add(tombolPanel, java.awt.BorderLayout.PAGE_END);
 
-        formPanel.add(bawahPanel, java.awt.BorderLayout.SOUTH);
-
-        getContentPane().add(formPanel, java.awt.BorderLayout.CENTER);
+        getContentPane().add(bawahPanel, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -172,37 +171,7 @@ public class DialogKontak extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                DialogKontak dialog = new DialogKontak(new javax.swing.JFrame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//            }
-//        });
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
