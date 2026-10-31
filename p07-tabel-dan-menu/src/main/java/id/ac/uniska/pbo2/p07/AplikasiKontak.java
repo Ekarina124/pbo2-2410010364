@@ -149,7 +149,7 @@ public class AplikasiKontak extends javax.swing.JFrame {
         kontakMenu.add(ubahItem);
         kontakMenu.add(kontakSeparator);
 
-        hapusItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        hapusItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, 0));
         hapusItem.setText("Hapus");
         hapusItem.addActionListener(this::hapusItemActionPerformed);
         kontakMenu.add(hapusItem);
