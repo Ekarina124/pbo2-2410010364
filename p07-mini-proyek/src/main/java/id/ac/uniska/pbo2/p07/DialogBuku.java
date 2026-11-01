@@ -73,6 +73,7 @@ public class DialogBuku extends javax.swing.JDialog {
         simpanButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Dialog Buku");
         setResizable(false);
 
         formPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 16, 8, 16));

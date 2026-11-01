@@ -11,7 +11,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Vivobook
  */
-public class BukuTabelModel extends AbstractTableModel {
+public class BukuTableModel extends AbstractTableModel {
     private static final String[] KOLOM = {"Kode", "Judul", "Penulis", "Tahun Terbit", "Status"};
 
     private final List<Buku> daftar = new ArrayList<>();
