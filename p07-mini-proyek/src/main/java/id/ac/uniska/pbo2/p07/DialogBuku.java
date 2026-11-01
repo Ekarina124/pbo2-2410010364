@@ -28,6 +28,7 @@ public class DialogBuku extends javax.swing.JDialog {
         super(pemilik, judul, true); //true berarti modal
         this.kodeSudahAda = kodeSudahAda;
         initComponents();
+        setTitle(judul);
         if (awal != null) {
             kodeField.setText(awal.kode());
             judulField.setText(awal.judul());
