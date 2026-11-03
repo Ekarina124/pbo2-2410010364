@@ -5,15 +5,6 @@ package id.ac.uniska.pbo2.p08.uts.b;
 
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import java.awt.Color;
-import java.awt.Font;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -27,8 +18,7 @@ public class FormBelanja extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormBelanja.class.getName());
 
-    // Dibuat sebelum initComponents() karena dipakai sebagai model JTable
-    private final BarangTableModel model = new BarangTableModel();
+
         // Deklarasikan di sini
     private int barisEdit = -1;
 
@@ -38,36 +28,7 @@ public class FormBelanja extends javax.swing.JFrame {
     public FormBelanja() {
         initComponents();
         
-        java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 9;
-        gbc.gridwidth = 2;
-        gbc.weighty = 1.0;
-        gbc.fill = java.awt.GridBagConstraints.VERTICAL;
-
-        formPanel.add(new javax.swing.JPanel(), gbc);
-        
-         // Placeholder
-        namaBarangField.putClientProperty("JTextField.placeholderText", "Contoh: Pulpen");
-        hargaField.putClientProperty("JTextField.placeholderText", "Tanpa titik, contoh 15000");
-        
-        // Label pesan: huruf kecil dan merah yang mengikuti tema
-        for (JLabel pesan : List.of(namaPesanLabel, hargaPesanLabel)) {
-            pesan.putClientProperty("FlatLaf.styleClass", "small");
-            pesan.setForeground(warnaKesalahan());
-        }
-        ringkasanLabel.setFont(ringkasanLabel.getFont().deriveFont(Font.BOLD));
-
-        // Kolom Harga, Jumlah, Subtotal rata kanan
-        DefaultTableCellRenderer kanan = new DefaultTableCellRenderer();
-        kanan.setHorizontalAlignment(SwingConstants.RIGHT);
-        for (int kolom = 2; kolom <= 4; kolom++) {
-            barangTable.getColumnModel().getColumn(kolom).setCellRenderer(kanan);
-        }
-        
-        getRootPane().setDefaultButton(tambahButton); // Enter = Tambah
-        isiContoh();
-        perbaruiRingkasan();
+       
 //        setSize(900, 480);
         setLocationRelativeTo(null);
         pack(); // menghitung ulang komponen untuk ukuran keseluruhan
@@ -266,85 +227,7 @@ public class FormBelanja extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_namaBarangFieldFocusLost
 
-    // ===== Method bantu =====
-    private void tambah() {
-        // Semua isian diperiksa agar pengguna melihat seluruh kesalahan sekaligus
-        List<JComponent> salah = new ArrayList<>();
-        if (!periksaNama()) {
-            salah.add(namaBarangField);
-        }
-        if (!periksaHarga()) {
-            salah.add(hargaField);
-        }
-        if (!salah.isEmpty()) {
-            salah.get(0).requestFocusInWindow(); // fokus ke kesalahan pertama
-            return;
-        }
-
-        String nama = namaBarangField.getText().trim();
-        double harga = Double.parseDouble(hargaField.getText().trim());
-        KategoriBarang kategori = (KategoriBarang) kategoriCombo.getSelectedItem();
-        int jumlah = (int) jumlahSpinner.getValue();
-
-        model.tambah(new Barang(nama, kategori, harga, jumlah));
-        bersihkan();
-        perbaruiRingkasan();
-    }
-
-    /** Mengosongkan isian dan pesan kesalahan. Tabel tidak diubah. */
-    private void bersihkan() {
-        namaBarangField.setText("");
-        hargaField.setText("");
-        kategoriCombo.setSelectedIndex(0);
-        jumlahSpinner.setValue(1);
-        tandai(namaBarangField, namaPesanLabel, null);
-        tandai(hargaField, hargaPesanLabel, null);
-        namaBarangField.requestFocusInWindow();
-    }
     
-    private boolean periksaNama() {
-        return tandai(namaBarangField, namaPesanLabel,
-                Validator.namaBarang(namaBarangField.getText(), model, barisEdit));
-    }
-
-    private boolean periksaHarga() {
-        return tandai(hargaField, hargaPesanLabel, Validator.harga(hargaField.getText()));
-    }
-
-    /** Garis merah dan pesan pada isian yang salah. Mengembalikan true jika valid. */
-    private boolean tandai(JComponent isian, JLabel pesan, String kesalahan) {
-        isian.putClientProperty("JComponent.outline", (kesalahan == null) ? null : "error");
-        pesan.setText((kesalahan == null) ? " " : kesalahan);
-        return kesalahan == null;
-    }
-
-    /** Merah yang mudah dibaca: lebih gelap di tema terang, lebih terang di tema gelap. */
-    static Color warnaKesalahan() {
-        return FlatLaf.isLafDark() ? new Color(0xFF8A80) : new Color(0xC62828);
-    }
-    
-    
-    private void perbaruiRingkasan() {
-        ringkasanLabel.setText("Total " + Rupiah.format(model.total())
-                + ", diskon " + Rupiah.format(model.diskon())
-                + ", bayar " + Rupiah.format(model.bayar()));
-    }
-
-    private void isiContoh() {
-        model.tambah(new Barang("Pulpen", KategoriBarang.ALAT_TULIS, 3500, 4));
-        model.tambah(new Barang("Buku Tulis", KategoriBarang.ALAT_TULIS, 6000, 10));
-        model.tambah(new Barang("Tas Bekal", KategoriBarang.LAINNYA, 26000, 1));
-        model.tambah(new Barang("Spidol", KategoriBarang.ALAT_TULIS, 12500, 2));
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        FlatLightLaf.setup();
-        java.awt.EventQueue.invokeLater(() -> new FormBelanja().setVisible(true));
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable barangTable;
     private javax.swing.JButton bersihkanButton;
