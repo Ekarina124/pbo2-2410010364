@@ -4,6 +4,14 @@
  */
 package id.ac.uniska.pbo2.p10.mvc.siperpus.view;
 
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import id.ac.uniska.pbo2.p10.mvc.siperpus.model.Buku;
+import java.awt.Color;
+import java.awt.Window;
+import java.time.Year;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Vivobook
@@ -11,13 +19,32 @@ package id.ac.uniska.pbo2.p10.mvc.siperpus.view;
 public class DialogBuku extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DialogBuku.class.getName());
-
+    private final int id;
+    private Buku hasil; // tetap null jika dibatalkan
     /**
      * Creates new form DialogBuku
      */
-    public DialogBuku(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
+    public DialogBuku(Window pemilik, String judul, Buku awal) {
+        super(pemilik, judul, ModalityType.APPLICATION_MODAL);
+        initComponents();      
+        id = awal == null ? 0 : awal.id();
+        
+        if (awal != null) {
+            kodeField.setText(awal.kode());
+            judulField.setText(awal.judul());
+            penulisField.setText(awal.penulis());
+            tahunField.setText(String.valueOf(awal.tahun()));
+            stokSpinner.setValue(awal.stok());
+        }
+        kodeField.putClientProperty("JTextField.placeholderText", "Contoh: PBO-001");
+        tahunField.putClientProperty("JTextField.placeholderText", "Contoh: 2024");
+        pesanLabel.putClientProperty("FlatLaf.styleClass", "small");
+        pesanLabel.setForeground(FlatLaf.isLafDark()
+                ? new Color(0xFF8A80) : new Color(0xC62828));
+        getRootPane().setDefaultButton(simpanButton);
+        
+        pack();
+        setLocationRelativeTo(pemilik);
     }
 
     /**
@@ -31,122 +58,166 @@ public class DialogBuku extends javax.swing.JDialog {
 
         formPanel = new javax.swing.JPanel();
         labelPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        kodeLabel = new javax.swing.JLabel();
+        judulLabel = new javax.swing.JLabel();
+        penulisLabel = new javax.swing.JLabel();
+        tahunLabel = new javax.swing.JLabel();
+        stokLabel = new javax.swing.JLabel();
         isianPanel = new javax.swing.JPanel();
+        kodeField = new javax.swing.JTextField();
+        judulField = new javax.swing.JTextField();
+        penulisField = new javax.swing.JTextField();
+        tahunField = new javax.swing.JTextField();
+        stokSpinner = new javax.swing.JSpinner();
         bawahPanel = new javax.swing.JPanel();
         pesanLabel = new javax.swing.JLabel();
         tombolPanel = new javax.swing.JPanel();
+        batalButton = new javax.swing.JButton();
+        simpanButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        formPanel.setLayout(new java.awt.BorderLayout());
+        formPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 16, 8, 16));
+        formPanel.setLayout(new java.awt.BorderLayout(8, 0));
 
-        labelPanel.setLayout(new java.awt.GridLayout());
+        labelPanel.setLayout(new java.awt.GridLayout(0, 1, 0, 8));
 
-        jLabel1.setText("jLabel1");
-        labelPanel.add(jLabel1);
+        kodeLabel.setText("Kode");
+        labelPanel.add(kodeLabel);
 
-        jLabel2.setText("jLabel2");
-        labelPanel.add(jLabel2);
+        judulLabel.setText("Judul");
+        labelPanel.add(judulLabel);
 
-        jLabel3.setText("jLabel3");
-        labelPanel.add(jLabel3);
+        penulisLabel.setText("Penulis");
+        labelPanel.add(penulisLabel);
 
-        jLabel4.setText("jLabel4");
-        labelPanel.add(jLabel4);
+        tahunLabel.setText("Tahun");
+        labelPanel.add(tahunLabel);
+
+        stokLabel.setText("Stok");
+        labelPanel.add(stokLabel);
 
         formPanel.add(labelPanel, java.awt.BorderLayout.WEST);
 
-        isianPanel.setLayout(new java.awt.GridLayout());
+        isianPanel.setLayout(new java.awt.GridLayout(0, 1, 0, 8));
+
+        kodeField.setColumns(22);
+        isianPanel.add(kodeField);
+        isianPanel.add(judulField);
+        isianPanel.add(penulisField);
+        isianPanel.add(tahunField);
+
+        stokSpinner.setModel(new
+            javax.swing.SpinnerNumberModel(1, 0, 999, 1));
+        isianPanel.add(stokSpinner);
+
         formPanel.add(isianPanel, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(formPanel, java.awt.BorderLayout.CENTER);
 
         bawahPanel.setLayout(new java.awt.BorderLayout());
 
         pesanLabel.setText("jLabel1");
         bawahPanel.add(pesanLabel, java.awt.BorderLayout.SOUTH);
 
-        javax.swing.GroupLayout tombolPanelLayout = new javax.swing.GroupLayout(tombolPanel);
-        tombolPanel.setLayout(tombolPanelLayout);
-        tombolPanelLayout.setHorizontalGroup(
-            tombolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        tombolPanelLayout.setVerticalGroup(
-            tombolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 284, Short.MAX_VALUE)
-        );
+        tombolPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 8, 0));
+
+        batalButton.setText("Batal");
+        batalButton.addActionListener(this::batalButtonActionPerformed);
+        tombolPanel.add(batalButton);
+
+        simpanButton.setText("Simpan");
+        simpanButton.addActionListener(this::simpanButtonActionPerformed);
+        tombolPanel.add(simpanButton);
 
         bawahPanel.add(tombolPanel, java.awt.BorderLayout.SOUTH);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(formPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(bawahPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(formPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(bawahPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        getContentPane().add(bawahPanel, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void batalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalButtonActionPerformed
+        dispose();
+    }//GEN-LAST:event_batalButtonActionPerformed
+
+    private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
+        simpan();
+    }//GEN-LAST:event_simpanButtonActionPerformed
+
+    private void simpan() {
+        String kode = kodeField.getText().trim().toUpperCase();
+        String judul = judulField.getText().trim();
+        String penulis = penulisField.getText().trim();
+        
+        if (!kode.matches("[A-Z]{2,4}-\\d{3}")) {
+            tandai(kodeField, "Kode berisi 2 sampai 4 huruf, tanda minus, dan 3 angka");
+            return;
+        }
+        if (judul.isEmpty()) {
+            tandai(judulField, "Judul wajib diisi");
+            return;
+        }
+        if (penulis.isEmpty()) {
+            tandai(penulisField, "Penulis wajib diisi");
+            return;
+        }
+        int tahunIni = Year.now().getValue();
+        int tahun = bacaAngka(tahunField.getText());
+        if (tahun < 1900 || tahun > tahunIni) {
+            tandai(tahunField, "Tahun terbit berupa angka 1900 sampai " + tahunIni);
+            return;
+        }
+        hasil = new Buku(id, kode, judul, penulis, tahun, (Integer) stokSpinner.getValue());
+        dispose();
+    }
+    
+    /** Mengembalikan -1 jika teks bukan angka bulat. */
+    private static int bacaAngka(String teks) {
+        try {
+            return Integer.parseInt(teks.trim());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+    
+    private void tandai(JTextField field, String pesan) {
+        pesanLabel.setText(pesan);
+        field.requestFocusInWindow();
+    }
+    
+    /** Menampilkan dialog dan menunggu sampai ditutup. */
+    public Buku tampilkan() {
+        setVisible(true);
+        return hasil;
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                DialogBuku dialog = new DialogBuku(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+        FlatLightLaf.setup();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton batalButton;
     private javax.swing.JPanel bawahPanel;
     private javax.swing.JPanel formPanel;
     private javax.swing.JPanel isianPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField judulField;
+    private javax.swing.JLabel judulLabel;
+    private javax.swing.JTextField kodeField;
+    private javax.swing.JLabel kodeLabel;
     private javax.swing.JPanel labelPanel;
+    private javax.swing.JTextField penulisField;
+    private javax.swing.JLabel penulisLabel;
     private javax.swing.JLabel pesanLabel;
+    private javax.swing.JButton simpanButton;
+    private javax.swing.JLabel stokLabel;
+    private javax.swing.JSpinner stokSpinner;
+    private javax.swing.JTextField tahunField;
+    private javax.swing.JLabel tahunLabel;
     private javax.swing.JPanel tombolPanel;
     // End of variables declaration//GEN-END:variables
 }
