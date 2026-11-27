@@ -126,7 +126,7 @@ public class DialogKontak extends javax.swing.JDialog {
         simpanButton.addActionListener(this::simpanButtonActionPerformed);
         tombolPanel.add(simpanButton);
 
-        bawahPanel.add(tombolPanel, java.awt.BorderLayout.PAGE_END);
+        bawahPanel.add(tombolPanel, java.awt.BorderLayout.SOUTH);
 
         getContentPane().add(bawahPanel, java.awt.BorderLayout.SOUTH);
 
